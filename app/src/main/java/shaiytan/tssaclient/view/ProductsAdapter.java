@@ -61,7 +61,7 @@ public class ProductsAdapter extends BaseAdapter {
                 .into(holder.img);
         holder.title.setText(product.getTitle());
         holder.description.setText(product.getText());
-        return null;
+        return v;
     }
 
     class ViewHolder {

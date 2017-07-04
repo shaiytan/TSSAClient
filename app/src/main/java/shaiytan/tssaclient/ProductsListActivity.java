@@ -1,12 +1,9 @@
 package shaiytan.tssaclient;
 
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -28,17 +25,14 @@ public class ProductsListActivity extends AppCompatActivity {
         }
     };
     private ProductsModel products;
-    private RecyclerView productsView;
+    private ListView productsView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products_list);
         products = new ProductsModel();
-        productsView = (RecyclerView) findViewById(R.id.products);
-        productsView.setLayoutManager(
-                new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        productsView.setItemAnimator(new DefaultItemAnimator());
+        productsView = (ListView) findViewById(R.id.products);
         try {
             loader.execute().get();
         } catch (InterruptedException | ExecutionException e) {

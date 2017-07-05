@@ -21,7 +21,7 @@ public class ProductsModel {
             if (response.isSuccessful()) products = Arrays.asList(response.body());
             else products = Collections.emptyList();
         } catch (Exception e) {
-            return Collections.emptyList();
+            products = Collections.emptyList();
         }
         return products;
     }

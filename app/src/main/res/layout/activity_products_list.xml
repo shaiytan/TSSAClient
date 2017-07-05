@@ -5,8 +5,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="10dp">
 
-    <ListView
-        android:id="@+id/products"
+    <FrameLayout
+        android:id="@+id/products_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </RelativeLayout>

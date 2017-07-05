@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -14,33 +15,34 @@ import java.util.List;
 
 import shaiytan.tssaclient.R;
 import shaiytan.tssaclient.model.Product;
+import shaiytan.tssaclient.model.Review;
 
 /**
- * Created by Shaiytan on 04.07.2017.
+ * Created by Shaiytan on 05.07.2017.
  */
 
-class ProductsAdapter extends BaseAdapter {
+public class ReviewsAdapter extends BaseAdapter {
     private Context context;
-    private List<Product> products;
-    public ProductsAdapter(Context context, List<Product> products) {
+    private List<Review> reviews;
+
+    public ReviewsAdapter(Context context, List<Review> reviews) {
         this.context = context;
-        this.products = products;
+        this.reviews = reviews;
     }
 
     @Override
     public int getCount() {
-        return products.size();
+        return reviews.size();
     }
-
 
     @Override
     public Object getItem(int position) {
-        return products.get(position);
+        return reviews.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return products.get(position).getId();
+        return reviews.get(position).getID();
     }
 
     @Override
@@ -49,29 +51,28 @@ class ProductsAdapter extends BaseAdapter {
         ViewHolder holder;
         if(v==null){
             v = LayoutInflater.from(context)
-                    .inflate(R.layout.product_layout, parent, false);
+                    .inflate(R.layout.review_layout, parent, false);
             holder=new ViewHolder(v);
             v.setTag(holder);
         } else {
             holder = (ViewHolder) v.getTag();
         }
-        Product product = products.get(position);
-        Picasso.with(context)
-                .load("http://smktesting.herokuapp.com/static/"+product.getImageID())
-                .into(holder.img);
-        holder.title.setText(product.getTitle());
-        holder.description.setText(product.getText());
+        Review review = reviews.get(position);
+        holder.rating.setRating(review.getRate());
+        holder.username.setText(review.getUser());
+        holder.reviewText.setText(review.getText());
+
         return v;
     }
 
     class ViewHolder {
-        ImageView img;
-        TextView title;
-        TextView description;
+        private RatingBar rating;
+        private TextView username;
+        private TextView reviewText;
         ViewHolder(View itemView) {
-            img = (ImageView) itemView.findViewById(R.id.img);
-            title = (TextView) itemView.findViewById(R.id.profuct_title);
-            description = (TextView) itemView.findViewById(R.id.desc);
+            rating = (RatingBar) itemView.findViewById(R.id.rating);
+            username = (TextView) itemView.findViewById(R.id.username);
+            reviewText = (TextView) itemView.findViewById(R.id.review_text);
         }
     }
 }

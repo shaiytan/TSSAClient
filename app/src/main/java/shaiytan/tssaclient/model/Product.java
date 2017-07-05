@@ -1,10 +1,12 @@
 package shaiytan.tssaclient.model;
 
+import java.io.Serializable;
+
 /**
  * Created by Shaiytan on 04.07.2017.
  */
 
-public class Product {
+public class Product implements Serializable{
     private int id;
     private String img;
     private String text;

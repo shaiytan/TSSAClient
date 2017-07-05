@@ -8,5 +8,13 @@
     <FrameLayout
         android:id="@+id/products_fragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/review_form"
+        />
+    <FrameLayout
+        android:id="@+id/review_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        />
 </RelativeLayout>

@@ -3,16 +3,12 @@ package shaiytan.tssaclient;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ListView;
-
-import java.util.List;
-
 import shaiytan.tssaclient.model.Product;
 import shaiytan.tssaclient.view.ProductFragment;
 import shaiytan.tssaclient.view.ProductsListFragment;
+import shaiytan.tssaclient.view.ReviewFormFragment;
 
 public class ProductsListActivity
         extends AppCompatActivity
@@ -32,9 +28,11 @@ public class ProductsListActivity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ProductFragment fragment = ProductFragment.newInstance((Product) parent.getAdapter().getItem(position));
+        ReviewFormFragment form = ReviewFormFragment.newInstance((int)id,"");
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.products_fragment,fragment)
+                .add(R.id.review_form,form)
                 .commit();
     }
 }

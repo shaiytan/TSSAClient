@@ -5,16 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import shaiytan.tssaclient.R;
-import shaiytan.tssaclient.model.Product;
 import shaiytan.tssaclient.model.Review;
 
 /**
@@ -61,7 +58,6 @@ public class ReviewsAdapter extends BaseAdapter {
         holder.rating.setRating(review.getRate());
         holder.username.setText(review.getUser());
         holder.reviewText.setText(review.getText());
-
         return v;
     }
 

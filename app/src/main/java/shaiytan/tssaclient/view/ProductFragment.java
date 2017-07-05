@@ -61,17 +61,19 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
-        image = (ImageView) view.findViewById(R.id.img);
+        View view = inflater.inflate(R.layout.fragment_products_list, container, false);
+        reviewsView = (ListView) view.findViewById(R.id.list);
+        View header = inflater.inflate(R.layout.fragment_product, null);
+        image = (ImageView) header.findViewById(R.id.img);
         Picasso.with(getContext())
                 .load("http://smktesting.herokuapp.com/static/"+product.getImageID())
                 .into(image);
-        title = (TextView) view.findViewById(R.id.product_title);
+        title = (TextView) header.findViewById(R.id.product_title);
         title.setText(product.getTitle());
-        desc = (TextView) view.findViewById(R.id.desc);
+        desc = (TextView) header.findViewById(R.id.desc);
         desc.setText(product.getText());
-        revCount = (TextView) view.findViewById(R.id.reviews);
-        reviewsView = (ListView) view.findViewById(R.id.review_list);
+        revCount = (TextView) header.findViewById(R.id.reviews);
+        reviewsView.addHeaderView(header);
         new AsyncTask<Object, Object, List<Review>>() {
             @Override
             protected List<Review> doInBackground(Object... params) {

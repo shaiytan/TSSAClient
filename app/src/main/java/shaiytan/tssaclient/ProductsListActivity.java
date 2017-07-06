@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,12 +58,13 @@ public class ProductsListActivity
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         ProductFragment fragment = ProductFragment.newInstance((Product) parent.getAdapter().getItem(position));
-        ReviewFormFragment form = ReviewFormFragment.newInstance((int)id,"");
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.products_fragment,fragment)
-                .add(R.id.review_form,form)
-                .commit();
+        ReviewFormFragment form = ReviewFormFragment.newInstance((int)id);
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.addToBackStack(null);
+        transaction.replace(R.id.products_fragment,fragment);
+        transaction.add(R.id.review_form,form);
+        transaction.commit();
+        form.setToken(token);
     }
     private void toggleAuth()
     {
@@ -75,7 +77,13 @@ public class ProductsListActivity
             token="";
             writeAuthData();
             updateAuthState();
+            setFragmentToken();
         }
+    }
+    private void setFragmentToken(){
+        ReviewFormFragment form = (ReviewFormFragment) fragmentManager.findFragmentById(R.id.review_form);
+        if(form!=null)
+            form.setToken(token);
     }
     private void writeAuthData(){
         SharedPreferences.Editor edit = pref.edit();
@@ -91,6 +99,7 @@ public class ProductsListActivity
             username = data.getStringExtra("username");
             writeAuthData();
             updateAuthState();
+            setFragmentToken();
         }
     }
     private void updateAuthState(){

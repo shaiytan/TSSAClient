@@ -107,4 +107,12 @@ public class ProductsListActivity
         if(token.isEmpty()) menuItem.setTitle("ВХОД");
         else menuItem.setTitle("ВЫХОД");
     }
+    public void updateList(){
+        try {
+            ProductFragment product = (ProductFragment) fragmentManager.findFragmentById(R.id.products_fragment);
+            product.loadData();
+        }catch (ClassCastException e){
+            e.printStackTrace();
+        }
+    }
 }

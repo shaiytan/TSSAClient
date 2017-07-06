@@ -74,6 +74,11 @@ public class ProductFragment extends Fragment {
         desc.setText(product.getText());
         revCount = (TextView) header.findViewById(R.id.reviews);
         reviewsView.addHeaderView(header);
+        loadData();
+        return view;
+    }
+
+    public void loadData() {
         new AsyncTask<Object, Object, List<Review>>() {
             @Override
             protected List<Review> doInBackground(Object... params) {
@@ -85,7 +90,6 @@ public class ProductFragment extends Fragment {
                 revCount.setText(String.format("Отзывы (%d):",reviewsList.size()));
             }
         }.execute();
-        return view;
     }
 
 }

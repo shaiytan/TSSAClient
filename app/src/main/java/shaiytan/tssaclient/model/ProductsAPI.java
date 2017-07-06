@@ -20,4 +20,6 @@ public interface ProductsAPI {
     Call<AuthResult> register(@Body AuthRequest data);
     @POST("api/login/?format=json")
     Call<AuthResult> login(@Body AuthRequest data);
+    @POST("api/reviews/{id}?format=json")
+    Call<CommentResult> postReview(@Path("id")int id,@Body Comment data,@Header("Authorization")String token);
 }

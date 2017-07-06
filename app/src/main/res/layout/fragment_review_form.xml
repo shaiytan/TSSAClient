@@ -33,19 +33,19 @@
                 android:layout_alignParentEnd="true"
                 android:id="@+id/rating_bar" />
             <EditText
-                android:id="@+id/comment"
+                android:id="@+id/et_comment_text"
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lines="2"
+                android:lines="1"
                 android:inputType="textMultiLine"
                 android:layout_below="@+id/rating_bar"/>
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/submit"
+                android:id="@+id/btn_submit"
                 android:text="Отправить"
-                android:layout_below="@+id/comment"
+                android:layout_below="@+id/et_comment_text"
                 android:layout_alignParentEnd="true"/>
 
         </RelativeLayout>

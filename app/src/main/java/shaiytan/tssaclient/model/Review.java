@@ -6,16 +6,19 @@ package shaiytan.tssaclient.model;
 
 public class Review {
     private int id;
-    private int product;
     private UserData created_by;
     private int rate;
     private String text;
 
+    public Review(int id, UserData created_by, int rate, String text) {
+        this.id = id;
+        this.created_by = created_by;
+        this.rate = rate;
+        this.text = text;
+    }
+
     public int getID() {
         return id;
-    }
-    public int getProductID() {
-        return product;
     }
     public String getUser() {
         return created_by.username;
@@ -27,7 +30,10 @@ public class Review {
         return text;
     }
     private class UserData {
-        private int id;
         private String username;
+
+        public UserData(String username) {
+            this.username = username;
+        }
     }
 }

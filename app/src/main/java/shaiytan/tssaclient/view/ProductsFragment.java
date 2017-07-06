@@ -4,8 +4,7 @@ package shaiytan.tssaclient.view;
 import android.os.*;
 import android.support.v4.app.Fragment;
 import android.view.*;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.widget.*;
 
 import java.util.List;
 
@@ -13,14 +12,11 @@ import shaiytan.tssaclient.*;
 import shaiytan.tssaclient.model.*;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Фрагмент списка товаров
  */
-public class ProductsListFragment extends Fragment {
+public class ProductsFragment extends Fragment {
 
-
-    public ProductsListFragment() {
-        // Required empty public constructor
-    }
+    public ProductsFragment() { }
 
     private ProductsModel products;
     private ListView productsView;
@@ -29,14 +25,14 @@ public class ProductsListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         products = new ProductsModel();
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_products_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         productsView = (ListView) view.findViewById(R.id.list);
+        // Обработка выбора элемента в активити
         productsView.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         new AsyncTask<Void, Void, List<Product>>() {
             @Override

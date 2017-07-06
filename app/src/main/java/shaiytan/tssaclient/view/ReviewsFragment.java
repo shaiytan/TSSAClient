@@ -17,31 +17,26 @@ import java.util.List;
 
 import shaiytan.tssaclient.R;
 import shaiytan.tssaclient.model.Product;
+import shaiytan.tssaclient.model.SiteAPI;
 import shaiytan.tssaclient.model.Review;
 import shaiytan.tssaclient.model.ReviewModel;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Фрагмент отображает выбранный товар и список его отзывов
  */
-public class ProductFragment extends Fragment {
+public class ReviewsFragment extends Fragment {
     private static final String PRODUCT = "product";
+
     private Product product;
     private ReviewModel reviews;
     private ListView reviewsView;
-    private ImageView image;
-    private TextView title;
-    private TextView desc;
     private TextView revCount;
 
-    public ProductFragment() {
-        // Required empty public constructor
-    }
+    public ReviewsFragment() {}
 
-    public static ProductFragment newInstance(Product product) {
-        ProductFragment fragment = new ProductFragment();
+    public static ReviewsFragment newInstance(Product product) {
+        ReviewsFragment fragment = new ReviewsFragment();
         Bundle args = new Bundle();
         args.putSerializable(PRODUCT, product);
         fragment.setArguments(args);
@@ -61,18 +56,20 @@ public class ProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_products_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_list, container, false);
         reviewsView = (ListView) view.findViewById(R.id.list);
-        View header = inflater.inflate(R.layout.fragment_product, null);
-        image = (ImageView) header.findViewById(R.id.img);
+
+        // Карточку с товаром запихнуть в заголовок списка, чтобы его можно было пролистать
+        View header = inflater.inflate(R.layout.header_layout, null);
+        ImageView image = (ImageView) header.findViewById(R.id.img);
         Picasso.with(getContext())
-                .load("http://smktesting.herokuapp.com/static/"+product.getImageID())
+                .load(SiteAPI.IMAGE_URL+product.getImageID())
                 .into(image);
-        title = (TextView) header.findViewById(R.id.product_title);
+        TextView title = (TextView) header.findViewById(R.id.tv_title);
         title.setText(product.getTitle());
-        desc = (TextView) header.findViewById(R.id.desc);
+        TextView desc = (TextView) header.findViewById(R.id.tv_desc);
         desc.setText(product.getText());
-        revCount = (TextView) header.findViewById(R.id.reviews);
+        revCount = (TextView) header.findViewById(R.id.tv_reviews_count);
         reviewsView.addHeaderView(header);
         loadData();
         return view;
@@ -91,5 +88,4 @@ public class ProductFragment extends Fragment {
             }
         }.execute();
     }
-
 }

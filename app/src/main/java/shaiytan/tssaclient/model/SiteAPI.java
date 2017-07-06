@@ -9,9 +9,13 @@ import retrofit2.http.Path;
 
 /**
  * Created by Shaiytan on 04.07.2017.
+ * Методы апи сайта
  */
 
-public interface ProductsAPI {
+public interface SiteAPI {
+    String IMAGE_URL = "http://smktesting.herokuapp.com/static/";
+    String BASE_URL = "http://smktesting.herokuapp.com/";
+
     @GET("api/products/?format=json")
     Call<Product[]> getProducts();
     @GET("api/reviews/{id}?format=json")

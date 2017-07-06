@@ -5,10 +5,11 @@ import shaiytan.tssaclient.TSSAClientApp;
 
 /**
  * Created by Shaiytan on 05.07.2017.
+ * регистрация/авторизация
  */
 
 public class AuthModel {
-    private ProductsAPI api;
+    private SiteAPI api;
     public static final String SIGN_IN = "Sign In";
     public static final String REGISTER = "Register";
     public AuthModel() {

@@ -4,25 +4,25 @@ import android.app.Application;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import shaiytan.tssaclient.model.ProductsAPI;
+import shaiytan.tssaclient.model.SiteAPI;
 
 /**
  * Created by Shaiytan on 04.07.2017.
  */
 
 public class TSSAClientApp extends Application {
-    private static ProductsAPI api;
+    private static SiteAPI api;
 
-    public static ProductsAPI getAPI() {
+    public static SiteAPI getAPI() {
         return api;
     }
     @Override
     public void onCreate() {
         super.onCreate();
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://smktesting.herokuapp.com/")
+                .baseUrl(SiteAPI.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        api = retrofit.create(ProductsAPI.class);
+        api = retrofit.create(SiteAPI.class);
     }
 }

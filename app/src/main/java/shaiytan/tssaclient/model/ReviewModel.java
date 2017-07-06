@@ -10,10 +10,11 @@ import shaiytan.tssaclient.TSSAClientApp;
 
 /**
  * Created by Shaiytan on 05.07.2017.
+ * список отзывов
  */
 
 public class ReviewModel {
-    private ProductsAPI api;
+    private SiteAPI api;
     public ReviewModel() {
         api = TSSAClientApp.getAPI();
     }

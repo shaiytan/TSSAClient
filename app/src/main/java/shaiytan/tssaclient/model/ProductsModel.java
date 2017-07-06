@@ -7,10 +7,11 @@ import shaiytan.tssaclient.TSSAClientApp;
 
 /**
  * Created by Shaiytan on 04.07.2017.
+ * список товаров
  */
 
 public class ProductsModel {
-    private ProductsAPI api;
+    private SiteAPI api;
     public ProductsModel() {
         api = TSSAClientApp.getAPI();
     }

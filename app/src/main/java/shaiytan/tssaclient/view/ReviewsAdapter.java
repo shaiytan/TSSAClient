@@ -18,11 +18,11 @@ import shaiytan.tssaclient.model.Review;
  * Created by Shaiytan on 05.07.2017.
  */
 
-public class ReviewsAdapter extends BaseAdapter {
+class ReviewsAdapter extends BaseAdapter {
     private Context context;
     private List<Review> reviews;
 
-    public ReviewsAdapter(Context context, List<Review> reviews) {
+    ReviewsAdapter(Context context, List<Review> reviews) {
         this.context = context;
         this.reviews = reviews;
     }
@@ -61,13 +61,13 @@ public class ReviewsAdapter extends BaseAdapter {
         return v;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
         private RatingBar rating;
         private TextView username;
         private TextView reviewText;
         ViewHolder(View itemView) {
             rating = (RatingBar) itemView.findViewById(R.id.rating);
-            username = (TextView) itemView.findViewById(R.id.username);
+            username = (TextView) itemView.findViewById(R.id.et_username);
             reviewText = (TextView) itemView.findViewById(R.id.review_text);
         }
     }

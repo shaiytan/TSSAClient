@@ -1,28 +1,26 @@
 package shaiytan.tssaclient.view;
 
 import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.*;
+import android.widget.*;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import shaiytan.tssaclient.R;
-import shaiytan.tssaclient.model.Product;
+import shaiytan.tssaclient.model.*;
 
 /**
  * Created by Shaiytan on 04.07.2017.
+ * Адаптер для списка товаров
  */
 
 class ProductsAdapter extends BaseAdapter {
     private Context context;
     private List<Product> products;
-    public ProductsAdapter(Context context, List<Product> products) {
+
+    ProductsAdapter(Context context, List<Product> products) {
         this.context = context;
         this.products = products;
     }
@@ -31,7 +29,6 @@ class ProductsAdapter extends BaseAdapter {
     public int getCount() {
         return products.size();
     }
-
 
     @Override
     public Object getItem(int position) {
@@ -57,21 +54,21 @@ class ProductsAdapter extends BaseAdapter {
         }
         Product product = products.get(position);
         Picasso.with(context)
-                .load("http://smktesting.herokuapp.com/static/"+product.getImageID())
+                .load(SiteAPI.IMAGE_URL +product.getImageID())
                 .into(holder.img);
         holder.title.setText(product.getTitle());
         holder.description.setText(product.getText());
         return v;
     }
 
-    class ViewHolder {
+    private class ViewHolder {
         ImageView img;
         TextView title;
         TextView description;
         ViewHolder(View itemView) {
             img = (ImageView) itemView.findViewById(R.id.img);
-            title = (TextView) itemView.findViewById(R.id.profuct_title);
-            description = (TextView) itemView.findViewById(R.id.desc);
+            title = (TextView) itemView.findViewById(R.id.tv_title);
+            description = (TextView) itemView.findViewById(R.id.tv_desc);
         }
     }
 }

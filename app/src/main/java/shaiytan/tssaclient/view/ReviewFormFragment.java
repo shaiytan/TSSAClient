@@ -1,23 +1,13 @@
 package shaiytan.tssaclient.view;
 
 
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RatingBar;
-import android.widget.Toast;
+import android.os.*;
+import android.support.v4.app.*;
+import android.view.*;
+import android.widget.*;
 
-import shaiytan.tssaclient.ProductsListActivity;
 import shaiytan.tssaclient.R;
-import shaiytan.tssaclient.model.Comment;
-import shaiytan.tssaclient.model.CommentPostModel;
+import shaiytan.tssaclient.model.*;
 
 
 public class ReviewFormFragment extends Fragment {
@@ -31,10 +21,7 @@ public class ReviewFormFragment extends Fragment {
     private int rate;
     private String comment;
 
-
-    public ReviewFormFragment() {
-        // Required empty public constructor
-    }
+    public ReviewFormFragment() { }
 
     public static ReviewFormFragment newInstance(int id) {
         ReviewFormFragment fragment = new ReviewFormFragment();
@@ -53,14 +40,15 @@ public class ReviewFormFragment extends Fragment {
         commentLoader = new CommentPostModel();
     }
 
+    //установить видимость фрагмента при возврате из активити авторизации
     @Override
     public void onResume() {
         super.onResume();
         setToken(token);
     }
 
-    public void setToken(String token)
-    {
+    // Скрыть если пользователь не авторизирован
+    public void setToken(String token) {
         this.token=token;
         FragmentManager fragmentManager = getFragmentManager();
         if(token.isEmpty()){
@@ -69,14 +57,14 @@ public class ReviewFormFragment extends Fragment {
             fragmentManager.beginTransaction().show(this).commit();
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_review_form, container, false);
-        commentView = (EditText) view.findViewById(R.id.comment);
+        commentView = (EditText) view.findViewById(R.id.et_comment_text);
         ratingView = (RatingBar) view.findViewById(R.id.rating_bar);
-        Button submit = (Button) view.findViewById(R.id.submit);
+        Button submit = (Button) view.findViewById(R.id.btn_submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,22 +73,21 @@ public class ReviewFormFragment extends Fragment {
         });
         return view;
     }
+
     private void submitComment(){
         rate = ratingView.getProgress();
         comment = commentView.getText().toString();
         new AsyncTask<Void,Void,Integer>(){
-
             @Override
             protected Integer doInBackground(Void... params) {
                 return commentLoader.postComment(id, new Comment(rate, comment), token);
             }
-
             @Override
             protected void onPostExecute(Integer res) {
                 if(res<0) Toast.makeText(getActivity(), "Failed", Toast.LENGTH_SHORT).show();
                 ratingView.setProgress(4);
                 commentView.setText("");
-                ((ProductsListActivity) getActivity()).updateList();
+                ((MainActivity) getActivity()).updateReviewsList();
             }
         }.execute();
     }

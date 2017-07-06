@@ -6,13 +6,13 @@
     android:padding="10dp">
 
     <FrameLayout
-        android:id="@+id/products_fragment"
+        android:id="@+id/list_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/review_form"
+        android:layout_above="@+id/review_form_container"
         />
     <FrameLayout
-        android:id="@+id/review_form"
+        android:id="@+id/review_form_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

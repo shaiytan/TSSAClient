@@ -7,10 +7,11 @@ import shaiytan.tssaclient.TSSAClientApp;
 
 /**
  * Created by Shaiytan on 06.07.2017.
+ * отправка отзыва
  */
 
 public class CommentPostModel {
-    private ProductsAPI api;
+    private SiteAPI api;
 
     public CommentPostModel() {
         api= TSSAClientApp.getAPI();
